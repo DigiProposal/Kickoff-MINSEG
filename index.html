@@ -3,20 +3,48 @@
 <head>
     <meta charset="UTF-M-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Concierge Médico – Policía Nacional de Panamá</title>
+    <title>Concierge Médico – MINSEG</title>
+    
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carga de la fuente Inter -->
+    
+    <!-- Carga de Fuentes (Oswald para títulos, Lato para cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Carga de Font Awesome (para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Estilo base con la fuente Inter */
+        /* Definición de la paleta de colores y fuentes del PDF */
+        :root {
+            --green-primary: #1e4630; /* Verde oscuro del MINSEG */
+            --green-accent: #2a9d8f; /* Verde azulado para acentos */
+            --font-title: 'Oswald', sans-serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        /* Aplicar fuentes base */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
         }
         
+        /* Contenedor de slide para aplicar fuentes */
+        .slide-content {
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem; /* 48px 64px */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos de fuentes para títulos y cabeceras */
+        .slide-content h1, .slide-content h2, .slide-content h3, .slide-content h4, .slide-content h5 {
+            font-family: var(--font-title);
+            color: var(--green-primary);
+        }
+
         /* Clases para la transición de slides */
         .slide {
             position: absolute;
@@ -24,18 +52,19 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
             z-index: 0;
-            pointer-events: none; /* Evita clicks en slides ocultas */
+            pointer-events: none;
+            background-color: #ffffff; /* Fondo blanco por defecto */
         }
 
         .slide.active {
             opacity: 1;
             z-index: 10;
-            pointer-events: auto; /* Permite interacción en slide activa */
+            pointer-events: auto;
         }
 
         /* Estilos para los botones de navegación */
         .nav-button {
-            background-color: #00529B; /* Azul Policía Nacional */
+            background-color: var(--green-primary); /* Verde oscuro */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 9999px;
@@ -44,7 +73,7 @@
             transition: all 0.3s ease;
         }
         .nav-button:hover {
-            background-color: #003E73;
+            background-color: #1a3a2a;
             transform: translateY(-2px);
         }
         .nav-button:disabled {
@@ -53,454 +82,681 @@
             cursor: not-allowed;
             transform: translateY(0);
         }
+
+        /* Estilos específicos para replicar el PDF */
+        .slide-content .pdf-title {
+            font-family: var(--font-title);
+            font-size: 2.75rem; /* 44px */
+            font-weight: 700;
+            color: var(--green-primary);
+            margin-bottom: 2.5rem; /* 40px */
+            line-height: 1.2;
+        }
+
+        .pdf-list > li {
+            position: relative;
+            padding-left: 2rem; /* 32px */
+            margin-bottom: 0.75rem; /* 12px */
+            font-size: 1.125rem; /* 18px */
+            color: #4B5563; /* text-gray-600 */
+        }
+        .pdf-list > li::before {
+            content: '+';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            color: var(--green-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .pdf-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem; /* 8px */
+            border: 1px solid #E5E7EB; /* border-gray-200 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 1.5rem; /* 24px */
+        }
+        
+        .image-placeholder {
+            filter: grayscale(1);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+<body class="bg-gray-200 flex items-center justify-center min-h-screen p-4">
 
     <div class="relative w-full max-w-5xl aspect-video bg-white rounded-xl shadow-2xl overflow-hidden">
         
         <!-- Contenedor de todas las slides -->
         <div id="presentation-container" class="w-full h-full">
 
-            <!-- Slide 1: Portada -->
-            <section class="slide active p-12 md:p-16 flex flex-col justify-between text-white bg-gradient-to-br from-blue-800 to-teal-600">
-                <div>
-                    <span class="text-lg font-semibold text-blue-200">PRESENTACIÓN DE KICK-OFF</span>
-                    <h1 class="text-4xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight">Concierge Médico</h1>
-                    <h2 class="text-2xl md:text-3xl font-light">Modelo Integral de Salud de la Policía Nacional de Panamá</h2>
-                </div>
-                
-                <div class="mt-8">
-                    <p class="text-xl md:text-2xl font-medium text-blue-100">Control de siniestralidad, priorización de red y acompañamiento personalizado al paciente.</p>
-                </div>
-
-                <!-- Logos (Placeholders) -->
-                <div class="absolute bottom-8 right-8 flex items-center gap-4">
-                    <div class="p-2 bg-white/80 rounded-md shadow-lg">
-                        <img src="https://placehold.co/100x40/ffffff/000000?text=MINSEG" alt="Logo MinSeg" class="h-8">
+            <!-- Slide 1: Portada (Página 1) -->
+            <section class="slide active">
+                <div class="w-full h-full grid grid-cols-10">
+                    <!-- Lado Izquierdo (Verde) -->
+                    <div class="col-span-4 bg-[var(--green-primary)] text-white p-10 flex flex-col justify-between">
+                        <div>
+                            <h1 class="font-['Oswald'] text-6xl font-bold tracking-wide">CONCIERGE MÉDICO</h1>
+                            <h2 class="font-['Oswald'] text-3xl font-light mt-4">Modelo Integral de Salud del MINSEG</h2>
+                        </div>
+                        <p class="font-['Lato'] text-lg">Control de siniestralidad, priorización de red y acompañamiento personalizado al paciente.</p>
+                        <!-- Logos -->
+                        <div class="flex flex-wrap gap-3 items-center">
+                            <img src="https://placehold.co/100x100/ffffff/000000?text=MINSEG" alt="Logo MINSEG" class="h-20 w-20 object-contain" title="MINSEG">
+                            <img src="https://placehold.co/80x80/ffffff/000000?text=Policia" alt="Logo Policia" class="h-16 w-16 object-contain" title="Policía Nacional">
+                            <img src="https://placehold.co/80x80/ffffff/000000?text=Senafront" alt="Logo Senafront" class="h-16 w-16 object-contain" title="Senafront">
+                            <img src="https://placehold.co/80x80/ffffff/000000?text=SPI" alt="Logo SPI" class="h-16 w-16 object-contain" title="SPI">
+                            <img src="https://placehold.co/80x80/ffffff/000000?text=Sinaproc" alt="Logo Sinaproc" class="h-16 w-16 object-contain" title="Sinaproc">
+                        </div>
                     </div>
-                    <div class="p-2 bg-white/80 rounded-md shadow-lg">
-                        <img src="https://placehold.co/100x40/ffffff/000000?text=Polic%C3%ADa" alt="Logo Policía Nacional" class="h-8">
-                    </div>
-                    <div class="p-2 bg-white/80 rounded-md shadow-lg">
-                        <img src="https://placehold.co/100x40/ffffff/000000?text=Aseguradora" alt="Logo Aseguradora" class="h-8">
+                    <!-- Lado Derecho (Imágenes) -->
+                    <div class="col-span-6 grid grid-rows-2 grid-cols-2 gap-px bg-gray-200">
+                        <img src="https://placehold.co/400x300/666/999?text=Doctor+Escribiendo" alt="Doctor Escribiendo" class="image-placeholder">
+                        <img src="https://placehold.co/400x300/666/999?text=Radiograf%C3%ADa" alt="Radiografía" class="image-placeholder">
+                        <img src="https://placehold.co/800x300/666/999?text=Consulta+M%C3%A9dica" alt="Consulta" class="image-placeholder col-span-2">
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 2: Introducción y Contexto -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Introducción y Contexto</h2>
-                
-                <div class="flex justify-center p-8">
-                    <!-- Objetivo General -->
-                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 md:w-3/4">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-4">Objetivo General</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            Garantizar una atención médica equitativa y de calidad para todos los miembros del Ministerio de Seguridad y la Policía Nacional, sin distinción de rango, mediante la implementación de un <strong>Concierge Médico Centralizado</strong> que facilite el acceso oportuno a prestadores de salud eficientes y comprometidos con la excelencia en el servicio. Este modelo busca optimizar la experiencia del paciente, asegurar la efectividad y oportunidad de la atención, y al mismo tiempo <strong>controlar la siniestralidad</strong>.
+            <!-- Slide 2: Introducción y Contexto (Página 2) -->
+            <section class="slide">
+                <div class="slide-content justify-center items-center">
+                    <div class="w-full max-w-4xl">
+                        <h2 class="pdf-title text-center">INTRODUCCIÓN Y CONTEXTO</h2>
+                        <div class="bg-gray-50 p-8 rounded-lg border-l-8 border-[var(--green-primary)] shadow-lg">
+                            <h3 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mb-4">Objetivo General</h3>
+                            <p class="font-['Lato'] text-xl text-gray-700 leading-relaxed">
+                                Garantizar una atención médica equitativa y de calidad para todos los miembros del Ministerio de Seguridad, sin distinción de rango, mediante la implementación de un <strong>Concierge Médico Centralizado</strong> que facilite el acceso oportuno a prestadores de salud eficientes y comprometidos con la excelencia en el servicio. Este modelo busca optimizar la experiencia del paciente, asegurar la efectividad y oportunidad de la atención, y al mismo tiempo <strong>controlar la siniestralidad</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Enfoque Estratégico (Página 3) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">ENFOQUE ESTRATÉGICO DEL NUEVO MODELO</h2>
+                    <!-- Tres Pilares -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="pdf-card">
+                            <i class="fa-solid fa-chart-line fa-3x text-[var(--green-accent)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold mb-2">Control Inteligente</h4>
+                            <p class="text-gray-600 text-lg">Monitoreo semanal en tiempo real de toda la siniestralidad.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <i class="fa-solid fa-user-gear fa-3x text-[var(--green-accent)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold mb-2">Gestión Integral</h4>
+                            <p class="text-gray-600 text-lg">Trazabilidad completa del paciente, desde la solicitud hasta el egreso.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <i class="fa-solid fa-handshake fa-3x text-[var(--green-accent)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold mb-2">Alianzas de Excelencia</h4>
+                            <p class="text-gray-600 text-lg">Red priorizada basada en desempeño clínico, tarifas y buenas prácticas.</p>
+                        </div>
+                    </div>
+                    <!-- Resultado Esperado -->
+                    <div class="mt-10 bg-green-50 p-6 rounded-lg text-center border-t-4 border-[var(--green-primary)]">
+                        <h3 class="font-['Oswald'] text-xl font-semibold text-gray-800">+ Resultado esperado</h3>
+                        <p class="text-lg text-gray-700 mt-2">
+                            Brindar una experiencia de atención médica sin fricciones, eficiente y centrada en el paciente, garantizando servicios de alta calidad, atención oportuna y la aplicación de buenas prácticas médicas que promuevan confianza, bienestar y resultados clínicos óptimos.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 3: Enfoque Estratégico -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Enfoque Estratégico del Nuevo Modelo</h2>
-                
-                <h3 class="text-xl font-semibold text-center text-gray-700 mb-6">Tres Pilares del Concierge Médico</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <!-- Pilar 1 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-blue-600">
-                        <svg class="w-12 h-12 text-blue-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v11a2 2 0 01-2 2z"></path></svg>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Control Inteligente</h4>
-                        <p class="text-gray-600 text-sm">Monitoreo semanal en tiempo real de toda la siniestralidad.</p>
-                    </div>
-                    <!-- Pilar 2 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-teal-600">
-                        <svg class="w-12 h-12 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Gestión Integral</h4>
-                        <p class="text-gray-600 text-sm">Trazabilidad completa del paciente, desde la solicitud hasta el egreso.</p>
-                    </div>
-                    <!-- Pilar 3 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-purple-600">
-                        <svg class="w-12 h-12 text-purple-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m6-4h1m-1 4h1m-1 4h1m-1-8h1m-1-4h1"></path></svg>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Alianzas de Excelencia</h4>
-                        <p class="text-gray-600 text-sm">Red priorizada basada en desempeño clínico, tarifas y buenas prácticas.</p>
-                    </div>
-                </div>
-
-                <!-- Resultado Esperado -->
-                <div class="mt-10 bg-green-50 p-6 rounded-lg text-center border border-green-200">
-                    <h3 class="text-xl font-semibold text-green-800">Resultado Esperado</h3>
-                    <p class="text-lg text-green-700 mt-2">Brindar una experiencia de atención médica sin fricciones, eficiente y centrada en el paciente, garantizando servicios de alta calidad, atención oportuna y la aplicación de buenas prácticas médicas que promuevan confianza, bienestar y resultados clínicos óptimos.</p>
-                </div>
-            </section>
-
-            <!-- Slide 4: Acompañamiento Integral del Paciente (Antes Slide 5) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Acompañamiento Integral y Control</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="flex justify-center">
-                        <!-- Visual: Filtro/Escudo -->
-                        <div class="relative w-64 h-64">
-                            <svg class="w-64 h-64 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-xl">Control</span>
+            <!-- Slide 4: Acompañamiento Integral (Página 4) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title">ACOMPAÑAMIENTO INTEGRAL Y CONTROL</h2>
+                    <div class="flex-grow grid grid-cols-2 gap-12">
+                        <div class="flex items-center justify-center overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/600x400/666/999?text=Equipo+de+An%C3%A1lisis" alt="Equipo de Análisis" class="image-placeholder">
                         </div>
-                    </div>
-                    
-                    <div>
-                        <p class="text-lg text-gray-700 mb-6">El concierge garantiza que ningún paciente sea desviado fuera de la <strong>red priorizada</strong>, evitando fugas hacia prestadores con malas prácticas o sobrecostos.</p>
-                        
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Mecanismos de Control:</h4>
-                        <ul class="space-y-2 list-disc list-inside text-gray-600">
-                            <li>Filtro de derivación obligatoria desde el concierge.</li>
-                            <li>Analista de datos que Monitorea siniestralidad y genera alertas de desviaciones o riesgos.</li>
-                            <li>Monitoreo de reingresos hospitalarios y reincidencias.</li>
-                            <li>Coordinación con auditores médicos y hospitalistas.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Slide 5: Gestión de Poblaciones de Alto Riesgo (Antes Slide 6) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Gestión de Poblaciones de Alto Riesgo</h2>
-                <p class="text-xl text-gray-700 mb-6 text-center"><strong>Objetivo:</strong> Reducir hospitalizaciones y aumentar la recuperación operativa del personal.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Estrategia -->
-                    <div>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Estrategia de Intervención:</h4>
-                        <ul class="space-y-3">
-                            <li class="p-3 bg-gray-50 rounded-md flex items-center gap-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold">1</span>
-                                <span><strong>Identificar</strong> pacientes con enfermedades crónicas (diabetes, HTA, asma, etc.).</span>
-                            </li>
-                            <li class="p-3 bg-gray-50 rounded-md flex items-center gap-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold">2</span>
-                                <span><strong>Asignar</strong> seguimiento médico mensual preventivo (presencial o domiciliario).</span>
-                            </li>
-                            <li class="p-3 bg-gray-50 rounded-md flex items-center gap-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold">3</span>
-                                <span><strong>Monitorear</strong> indicadores clave (adherencia, control metabólico, presión, etc.).</span>
-                            </li>
-                             <li class="p-3 bg-gray-50 rounded-md flex items-center gap-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold">4</span>
-                                <span><strong>Intervenir</strong> tempranamente ante alertas para evitar descompensaciones.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Programa de Reactivación -->
-                    <div class="bg-teal-50 p-6 rounded-lg border border-teal-200 flex flex-col items-center justify-center text-center">
-                         <svg class="w-16 h-16 text-teal-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <h4 class="text-xl font-bold text-teal-800 mb-2">Programa de Reactivación del Pie de Fuerza</h4>
-                        <p class="text-teal-700">Seguimiento clínico a policías en incapacidad para favorecer su reintegro operativo seguro y oportuno.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Slide 6: Metodología de Trabajo (Flujo) (Antes Slide 4) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-10 text-center">Metodología de Trabajo: El Viaje del Paciente</h2>
-                
-                <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-2">
-                    
-                    <!-- Paso 1: Recepción -->
-                    <div class="flex-1 w-full md:w-auto text-center p-4 bg-white rounded-lg shadow-md border border-gray-200">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">1</div>
-                        <h4 class="font-semibold text-gray-800">Recepción</h4>
-                        <p class="text-xs text-gray-600">Canal único (App, Call Center) y registro de ticket.</p>
-                    </div>
-                    
-                    <svg class="w-8 h-8 text-gray-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <svg class="w-8 h-8 text-gray-400 md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-
-
-                    <!-- Paso 2: Clasificación -->
-                    <div class="flex-1 w-full md:w-auto text-center p-4 bg-white rounded-lg shadow-md border border-gray-200">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">2</div>
-                        <h4 class="font-semibold text-gray-800">Clasificación</h4>
-                        <p class="text-xs text-gray-600">Triaje, categorización y nivel de atención (ambulatorio, urgencia, etc.).</p>
-                    </div>
-
-                    <svg class="w-8 h-8 text-gray-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <svg class="w-8 h-8 text-gray-400 md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-
-                    <!-- Paso 3: Asignación -->
-                    <div class="flex-1 w-full md:w-auto text-center p-4 bg-white rounded-lg shadow-md border border-gray-200">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">3</div>
-                        <h4 class="font-semibold text-gray-800">Asignación</h4>
-                        <p class="text-xs text-gray-600">Asignación a prestador adecuado dentro de la red priorizada.</p>
-                    </div>
-
-                    <svg class="w-8 h-8 text-gray-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <svg class="w-8 h-8 text-gray-400 md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-
-                    <!-- Paso 4: Acompañamiento -->
-                    <div class="flex-1 w-full md:w-auto text-center p-4 bg-white rounded-lg shadow-md border border-gray-200">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">4</div>
-                        <h4 class="font-semibold text-gray-800">Acompañamiento</h4>
-                        <p class="text-xs text-gray-600">Seguimiento activo, coordinación de autorizaciones y citas.</p>
-                    </div>
-                    
-                    <svg class="w-8 h-8 text-gray-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <svg class="w-8 h-8 text-gray-400 md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-
-                    <!-- Paso 5: Egreso y Cierre -->
-                    <div class="flex-1 w-full md:w-auto text-center p-4 bg-white rounded-lg shadow-md border border-gray-200">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">5</div>
-                        <h4 class="font-semibold text-gray-800">Egreso y Cierre</h4>
-                        <p class="text-xs text-gray-600">Validación de informes, alta, retroalimentación y actualización de BD.</p>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Slide 7: Metodología de Control y Analítica (Antes Slide 8) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Metodología de Control y Analítica</h2>
-                
-                <h3 class="text-xl font-semibold text-gray-700 mb-6 text-center">Componentes del Sistema de Gestión</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    <div class="flex items-start p-4 bg-gray-50 rounded-lg gap-4">
-                        <svg class="w-10 h-10 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                         <div>
-                            <h4 class="font-bold text-gray-800">Power BI de Siniestralidad</h4>
-                            <p class="text-sm text-gray-600">Tableros de monitoreo por diagnóstico, prestador y monto.</p>
-                        </div>
-                    </div>
-                    
-                     <div class="flex items-start p-4 bg-gray-50 rounded-lg gap-4">
-                        <svg class="w-10 h-10 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Sistema de Tickets</h4>
-                            <p class="text-sm text-gray-600">Seguimiento de cada caso y trazabilidad en tiempo real.</p>
-                        </div>
-                    </div>
-                    
-                     <div class="flex items-start p-4 bg-gray-50 rounded-lg gap-4">
-                        <svg class="w-10 h-10 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Alertas del Analista</h4>
-                            <p class="text-sm text-gray-600">Revisión de desviaciones fuera de red o aumento anormal de costos.</p>
-                        </div>
-                    </div>
-                    
-                     <div class="flex items-start p-4 bg-gray-50 rounded-lg gap-4">
-                        <svg class="w-10 h-10 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v11a2 2 0 01-2 2z"></path></svg>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Reportes al Advisory Board</h4>
-                            <p class="text-sm text-gray-600">Decisiones mensuales basadas en evidencia.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 8: Advisory Board (Antes Slide 9) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Advisory Board Médico-Administrativo</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Objetivo y Composición</h3>
-                        <p class="text-lg text-gray-700 mb-6">Gobernanza técnica del modelo y toma de decisiones estratégicas basadas en datos.</p>
-                        
-                        <h4 class="text-lg font-semibold text-gray-700">Composición:</h4>
-                        <ul class="space-y-2 list-disc list-inside text-gray-600 mt-2">
-                            <li>Médicos especialistas (internistas, ortopedistas, etc.)</li>
-                            <li>Expertos en analítica y auditoría médica</li>
-                            <li>Representantes del MinSeg y la Policía</li>
-                            <li>Coordinador del Concierge</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-4">Funciones Clave</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L8.586 6 6.293 8.293a1 1 0 101.414 1.414L10 7.414l2.293 2.293a1 1 0 001.414-1.414L11.414 6l2.293-2.293A1 1 0 0013 2H7z" clip-rule="evenodd"></path></svg>
-                                <span>Analizar siniestralidad mensual.</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L8.586 6 6.293 8.293a1 1 0 101.414 1.414L10 7.414l2.293 2.293a1 1 0 001.414-1.414L11.414 6l2.293-2.293A1 1 0 0013 2H7z" clip-rule="evenodd"></path></svg>
-                                <span>Revisar casos de alto costo.</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L8.586 6 6.293 8.293a1 1 0 101.414 1.414L10 7.414l2.293 2.293a1 1 0 001.414-1.414L11.414 6l2.293-2.293A1 1 0 0013 2H7z" clip-rule="evenodd"></path></svg>
-                                <span>Proponer estrategias preventivas y de red.</span>
-                            </li>
-                             <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L8.586 6 6.293 8.293a1 1 0 101.414 1.414L10 7.414l2.293 2.293a1 1 0 001.414-1.414L11.414 6l2.293-2.293A1 1 0 0013 2H7z" clip-rule="evenodd"></path></svg>
-                                <span>Medir impacto clínico y financiero del modelo.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Slide 9: Estructura Operativa (Antes Slide 7) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8">Estructura Operativa del Concierge</h2>
-                
-                <div class="overflow-hidden rounded-lg shadow-md border border-gray-200">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Rol</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Función Principal</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Concierge Central de Salud</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Equipo que Recibe solicitudes, clasifica y direcciona al prestador adecuado.</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Coordinador Médico</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Supervisa decisiones clínicas, enlace con aseguradora y prestadores.</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Auditor Médico</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Controla prácticas hospitalarias, altas tempranas y procesos quirúrgicos.</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Hospitalistas</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Gestionan estancias cortas y referencias controladas.</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Equipo Quirúrgico Aliado</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Especialistas alineados en costos y buenas prácticas.</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Analista de Datos</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Monitorea siniestralidad y genera alertas de desviaciones o riesgos.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            
-            <!-- Slide 10: Plan de Implementación (Timeline) -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-10 text-center">Plan de Implementación</h2>
-                
-                <div class="relative flex flex-col md:flex-row justify-between w-full px-4">
-                    <!-- Línea de tiempo -->
-                    <div class="absolute top-8 left-0 md:top-1/2 w-full md:w-full h-1 md:h-1 bg-blue-300 -translate-y-1/2 z-0"></div>
-                    
-                    <!-- Fase 1 -->
-                    <div class="flex-1 z-10 mb-8 md:mb-0">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 border-4 border-white shadow-lg">Fase 1</div>
-                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-                            <h4 class="font-bold text-blue-700 text-lg">Preparación</h4>
-                            <span class="font-semibold text-gray-600">(Mes 1)</span>
-                            <ul class="text-sm text-gray-600 mt-2 space-y-1 text-left list-disc list-inside">
-                                <li>Solicitud de datos.</li>
-                                <li>Instalación de sistema.</li>
-                                <li>Conformación de equipos.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Fase 2 -->
-                    <div class="flex-1 z-10 mb-8 md:mb-0">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 border-4 border-white shadow-lg">Fase 2</div>
-                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-                            <h4 class="font-bold text-blue-700 text-lg">Ejecución</h4>
-                            <span class="font-semibold text-gray-600">(Meses 2–4)</span>
-                            <ul class="text-sm text-gray-600 mt-2 space-y-1 text-left list-disc list-inside">
-                                <li>Inicio de seguimiento.</li>
-                                <li>Reportes en Power BI.</li>
-                                <li>Primeros indicadores.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Fase 3 -->
-                    <div class="flex-1 z-10">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 border-4 border-white shadow-lg">Fase 3</div>
-                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-                            <h4 class="font-bold text-blue-700 text-lg">Consolidación</h4>
-                            <span class="font-semibold text-gray-600">(Meses 5–6)</span>
-                            <ul class="text-sm text-gray-600 mt-2 space-y-1 text-left list-disc list-inside">
-                                <li>Programa de crónicos.</li>
-                                <li>Evaluación y ajustes.</li>
-                                <li>Informe de resultados.</li>
+                            <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                                El concierge garantiza que ningún paciente sea desviado fuera de la <strong>red priorizada</strong>, evitando fugas hacia prestadores con malas prácticas o sobrecostos.
+                            </p>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mb-4">Mecanismos de Control:</h4>
+                            <ul class="pdf-list">
+                                <li>Filtro de derivación obligatoria desde el concierge.</li>
+                                <li>Analista de datos que Monitorea siniestralidad y genera alertas de desviaciones o riesgos.</li>
+                                <li>Monitoreo de reingresos hospitalarios y reincidencias.</li>
+                                <li>Coordinación con auditores médicos y hospitalistas.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <!-- Slide 11: Resultados Esperados -->
-            <section class="slide p-12 md:p-16">
-                <h2 class="text-3xl font-bold text-blue-800 mb-10 text-center">Resultados Esperados</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Métrica 1 -->
-                    <div class="text-center bg-green-50 p-8 rounded-lg shadow-lg border-b-4 border-green-600">
-                        <span class="text-6xl font-extrabold text-green-600">10-20%</span>
-                        <h4 class="text-xl font-semibold text-gray-800 mt-4">Ahorro en Siniestralidad</h4>
-                        <p class="text-gray-600">(Primer Año)</p>
-                    </div>
-                    
-                    <!-- Métrica 2 -->
-                    <div class="text-center bg-green-50 p-8 rounded-lg shadow-lg border-b-4 border-green-600">
-                        <span class="text-6xl font-extrabold text-green-600">15-30%</span>
-                        <h4 class="text-xl font-semibold text-gray-800 mt-4">Reducción de Hospitalizaciones</h4>
-                        <p class="text-gray-600">(Innecesarias)</p>
-                    </div>
-                    
-                    <!-- Métrica 3 -->
-                    <div class="text-center bg-blue-50 p-8 rounded-lg shadow-lg border-b-4 border-blue-600">
-                        <svg class="w-16 h-16 text-blue-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 19H6a2 2 0 01-2-2V7a2 2 0 012-2h2l3.4-3.4A1 1 0 0114 4v6z"></path></svg>
-                        <h4 class="text-2xl font-bold text-gray-800 mt-4">Mayor Satisfacción</h4>
-                        <p class="text-gray-600">(Del paciente y recuperación de personal)</p>
+            <!-- Slide 5: Gestión de Poblaciones (Página 5) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title">GESTIÓN DE POBLACIONES DE ALTO RIESGO</h2>
+                    <p class="text-xl text-gray-700 mb-8 -mt-6"><strong>Objetivo:</strong> Reducir hospitalizaciones y aumentar la recuperación operativa del personal.</p>
+                    <div class="flex-grow grid grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mb-4">Estrategia de Intervención:</h4>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-4 text-lg">
+                                    <i class="fa-solid fa-house-medical fa-2x text-[var(--green-primary)] w-10 text-center"></i>
+                                    <span><strong>Identificar</strong> pacientes con enfermedades crónicas (diabetes, HTA, asma, etc).</span>
+                                </li>
+                                <li class="flex items-start gap-4 text-lg">
+                                    <i class="fa-solid fa-clipboard-user fa-2x text-[var(--green-primary)] w-10 text-center"></i>
+                                    <span><strong>Asignar</strong> seguimiento médico mensual preventivo (presencial o domiciliario).</span>
+                                </li>
+                                <li class="flex items-start gap-4 text-lg">
+                                    <i class="fa-solid fa-bell fa-2x text-[var(--green-primary)] w-10 text-center"></i>
+                                    <span><strong>Monitorear</strong> indicadores clave (adherencia, control metabólico, presión, etc.).</span>
+                                </li>
+                                <li class="flex items-start gap-4 text-lg">
+                                    <i class="fa-solid fa-person-running fa-2x text-[var(--green-primary)] w-10 text-center"></i>
+                                    <span><strong>Intervenir</strong> tempranamente ante alertas para evitar descompensaciones.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 p-8 rounded-lg border-2 border-dashed border-[var(--green-accent)] flex flex-col items-center justify-center text-center">
+                            <i class="fa-solid fa-user-shield fa-3x text-[var(--green-accent)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-bold text-[var(--green-primary)] mb-2">Programa de Reactivación del Pie de Fuerza</h4>
+                            <p class="text-lg text-gray-700">Seguimiento clínico a miembros en incapacidad para favorecer su reintegro operativo seguro y oportuno.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 12: Conclusión -->
-            <section class="slide p-12 md:p-16 bg-gray-800 text-white flex flex-col justify-center items-center text-center">
-                <h2 class="text-3xl font-bold text-teal-400 mb-8">Conclusión: Una Gestión Integral</h2>
-                
-                <p class="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-4xl">
-                    El <strong>Concierge Médico</strong> se consolida como una herramienta de gestión clínica, administrativa y tecnológica que:
-                </p>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 w-full max-w-4xl">
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-bold text-white">Centraliza</h4>
-                        <p class="text-gray-300 text-sm">La atención de todos los asegurados.</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-bold text-white">Optimiza</h4>
-                        <p class="text-gray-300 text-sm">La red de prestadores y recursos.</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-bold text-white">Mejora</h4>
-                        <p class="text-gray-300 text-sm">Los resultados de salud y reduce costos.</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-bold text-white">Fortalece</h4>
-                        <p class="text-gray-300 text-sm">La capacidad operativa del cuerpo policial.</p>
+            <!-- Slide 6: Metodología de Trabajo (Página 6) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">METODOLOGÍA DE TRABAJO: EL VIAJE DEL PACIENTE</h2>
+                    <div class="flex-grow flex items-center">
+                        <div class="w-full flex justify-between items-start space-x-4">
+                            <!-- Paso 1 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-phone fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">01</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Recepción</h4>
+                                <p class="text-sm text-gray-600">Canal único (App, Call Center) y registro de ticket.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 2 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-clipboard-check fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">02</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Clasificación</h4>
+                                <p class="text-sm text-gray-600">Triaje, categorización y nivel de atención (ambulatorio, urgencia, etc.).</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 3 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-location-dot fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">03</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Asignación</h4>
+                                <p class="text-sm text-gray-600">Asignación a prestador adecuado dentro de la red priorizada.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 4 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-user-doctor fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">04</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Acompañamiento</h4>
+                                <p class="text-sm text-gray-600">Seguimiento activo, coordinación de autorizaciones y citas.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 5 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-file-invoice fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">05</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Egreso y Cierre</h4>
+                                <p class="text-sm text-gray-600">Validación de informes, alta, retroalimentación y actualización de BD.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <p class="text-xl text-teal-300 font-semibold mt-12">
-                    Salud preventiva y controlada para la Policía Nacional de Panamá.
-                </p>
             </section>
 
-            <!-- Slide 13: Gracias -->
-            <section class="slide p-12 md:p-16 bg-gradient-to-br from-blue-800 to-teal-600 text-white flex flex-col justify-center items-center text-center">
-                <h2 class="text-7xl font-extrabold">Gracias</h2>
+            <!-- Slide 7: Metodología de Control (Página 7) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">METODOLOGÍA DE CONTROL Y ANALÍTICA</h2>
+                    <h3 class="font-['Oswald'] text-2xl font-semibold text-gray-700 mb-8 text-center -mt-6">Componentes del Sistema de Gestión</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-chart-pie fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Power BI de Siniestralidad</h4>
+                                <p class="text-gray-600 text-lg">Tableros de monitoreo por diagnóstico, prestador y monto.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-ticket fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Sistema de Tickets</h4>
+                                <p class="text-gray-600 text-lg">Seguimiento de cada caso y trazabilidad en tiempo real.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-user-secret fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Alertas del Analista</h4>
+                                <p class="text-gray-600 text-lg">Revisión de desviaciones fuera de red o aumento anormal de costos.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-file-prescription fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Reportes al Advisory Board</h4>
+                                <p class="text-gray-600 text-lg">Decisiones mensuales basadas en evidencia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 8: Advisory Board (Página 8) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title">ADVISORY BOARD MÉDICO-ADMINISTRATIVO</h2>
+                    <div class="flex-grow grid grid-cols-2 gap-12">
+                        <div class="space-y-4">
+                            <div class="pdf-card border-l-4 border-[var(--green-primary)]">
+                                <h3 class="font-['Oswald'] text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-crosshairs text-[var(--green-primary)]"></i> Objetivo y Composición</h3>
+                                <p class="text-lg text-gray-700 mt-2">Gobernanza técnica del modelo y toma de decisiones estratégicas basadas en datos.</p>
+                            </div>
+                            <div class="pdf-card">
+                                <h3 class="font-['Oswald'] text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-users text-[var(--green-primary)]"></i> Composición</h3>
+                                <ul class="pdf-list mt-2 text-lg">
+                                    <li>Médicos especialistas (internistas, ortopedistas...)</li>
+                                    <li>Expertos en analítica y auditoría médica</li>
+                                    <li>Representantes del MINSEG</li>
+                                    <li>Coordinador del Concierge</li>
+                                </ul>
+                            </div>
+                            <div class="pdf-card">
+                                <h3 class="font-['Oswald'] text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-star text-[var(--green-primary)]"></i> Funciones clave</h3>
+                                <ul class="pdf-list mt-2 text-lg">
+                                    <li>Analizar siniestralidad mensual.</li>
+                                    <li>Revisar casos de alto costo.</li>
+                                    <li>Proponer estrategias preventivas y de red.</li>
+                                    <li>Medir impacto clínico y financiero del modelo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/600x600/666/999?text=Reuni%C3%B3n+M%C3%A9dica" alt="Reunión Médica" class="image-placeholder">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Estructura Operativa (Página 9) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">ESTRUCTURA OPERATIVA DEL CONCIERGE</h2>
+                    <div class="grid grid-cols-2 gap-x-10 gap-y-6">
+                        <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Concierge Central de Salud</h4>
+                            <p class="text-gray-600 text-lg">Equipo que Recibe solicitudes, clasifica y direcciona al prestador adecuado.</p>
+                        </div>
+                         <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Coordinador Médico</h4>
+                            <p class="text-gray-600 text-lg">Supervisa decisiones clínicas, enlace con aseguradora y prestadores.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Auditor Médico</h4>
+                            <p class="text-gray-600 text-lg">Controla prácticas hospitalarias, altas tempranas y procesos quirúrgicos.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Hospitalistas</h4>
+                            <p class="text-gray-600 text-lg">Gestionan estancias cortas y referencias controladas.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Equipo Quirúrgico Aliado</h4>
+                            <p class="text-gray-600 text-lg">Especialistas alineados en costos y buenas prácticas.</p>
+                        </div>
+                        <div class="pdf-card">
+                            <h4 class="font-['Oswald'] text-xl font-semibold">Analista de Datos</h4>
+                            <p class="text-gray-600 text-lg">Monitorea siniestralidad y genera alertas de desviaciones o riesgos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ====== INICIO DE NUEVOS SLIDES TECNOLÓGICOS ====== -->
+
+            <!-- Slide 10: Arquitectura Omnicanal (NUEVO) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">ARQUITECTURA: PUNTOS DE CONTACTO (OMNICANAL)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow items-center">
+                        <div class="pdf-card h-full">
+                            <i class="fa-brands fa-whatsapp fa-3x text-green-500 mb-4"></i>
+                            <h4 class="font-['Oswald'] text-3xl font-semibold mb-3">Bot de WhatsApp (IA)</h4>
+                            <p class="text-gray-600 text-lg mb-4">Canal principal con IA conversacional para clasificar solicitudes:</p>
+                            <ul class="list-disc list-inside text-lg space-y-2">
+                                <li><strong>Urgencias:</strong> Derivadas automáticamente a llamada con soporte (ambulancias).</li>
+                                <li><strong>Órdenes Médicas:</strong> Canalizadas a preautorización automatizada.</li>
+                            </ul>
+                        </div>
+                        <div class="pdf-card h-full">
+                            <i class="fa-solid fa-desktop fa-3x text-blue-500 mb-4"></i>
+                            <h4 class="font-['Oswald'] text-3xl font-semibold mb-3">Portal Web MINSEG</h4>
+                            <p class="text-gray-600 text-lg mb-4">Portal de autogestión donde el usuario puede:</p>
+                             <ul class="list-disc list-inside text-lg space-y-2">
+                                <li>Ver beneficios y coberturas.</li>
+                                <li>Consultar su historial de atención.</li>
+                                <li>Crear solicitudes o reclamos.</li>
+                                <li>Acceder a servicios post-atención (aftercare).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Arquitectura Módulos (NUEVO) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">ARQUITECTURA: MÓDULOS CENTRALES DEL SISTEMA</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-ticket fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Módulo de Atención y Seguimiento</h4>
+                                <p class="text-gray-600 text-lg">Sistema de tickets con SLAs, trazabilidad y asignación a red priorizada.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-user-check fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Módulo Post Servicio (Aftercare)</h4>
+                                <p class="text-gray-600 text-lg">Encuestas de satisfacción, alertas de reingreso e indicadores de calidad.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-network-wired fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Módulo de Integración</h4>
+                                <p class="text-gray-600 text-lg">Conexión con clínicas aliadas (Paitilla, Todo Salud) para flujos de egreso y órdenes.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-card flex items-start gap-4">
+                            <i class="fa-solid fa-chart-pie fa-2x text-[var(--green-primary)] mt-1"></i>
+                            <div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Módulo BI y Control Operativo</h4>
+                                <p class="text-gray-600 text-lg">Dashboards con KPIs de tiempos, costos, satisfacción y performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Flujo del Paciente (NUEVO / MOCKUP) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">FLUJO DEL PACIENTE (EXPERIENCIA OMNICANAL)</h2>
+                    <div class="flex-grow flex items-center">
+                        <div class="w-full flex justify-between items-start space-x-4">
+                            <!-- Paso 1 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-mobile-screen-button fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">01</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Contacto Inicial</h4>
+                                <p class="text-sm text-gray-600">Paciente contacta por WhatsApp/Portal.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 2 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-robot fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">02</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Clasificación IA</h4>
+                                <p class="text-sm text-gray-600">Bot clasifica (Urgencia / No Urgencia) y crea ticket.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 3 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-location-dot fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">03</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Asignación</h4>
+                                <p class="text-sm text-gray-600">Sistema asigna a red priorizada (humano o automático).</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 4 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-user-doctor fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">04</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Atención y Egreso</h4>
+                                <p class="text-sm text-gray-600">Proveedor atiende. Flujo de egreso se integra al sistema.</p>
+                            </div>
+                            <div class="text-gray-300 mt-2"><i class="fa-solid fa-arrow-right fa-2x"></i></div>
+                            <!-- Paso 5 -->
+                            <div class="flex-1 text-center">
+                                <div class="relative mb-3">
+                                    <i class="fa-solid fa-circle-check fa-2x text-[var(--green-primary)]"></i>
+                                    <span class="absolute top-0 left-1/2 -translate-x-full -translate-y-1/2 font-['Oswald'] text-4xl font-bold text-gray-300">05</span>
+                                </div>
+                                <h4 class="font-['Oswald'] text-xl font-semibold">Aftercare y Cierre</h4>
+                                <p class="text-sm text-gray-600">Módulo post-servicio contacta, mide satisfacción y cierra caso.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Fases de Desarrollo (NUEVO) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">FASES DE DESARROLLO (PLATAFORMA)</h2>
+                    <div class="flex-grow flex flex-col justify-center">
+                        <div class="relative w-full px-10">
+                            <!-- Línea Horizontal -->
+                            <div class="absolute top-1/2 left-0 right-0 h-1 bg-[var(--green-primary)] -translate-y-1/2"></div>
+                            
+                            <div class="relative flex justify-between">
+                                <!-- Fase 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-people-group fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">Fase 1</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Operación Manual</h4>
+                                    <p class="text-lg text-gray-600 mt-2 text-center">Uso de Monday.com/Odoo e<br>integración WhatsApp.</p>
+                                </div>
+                                <!-- Fase 2 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-cogs fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">Fase 2</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Automatización</h4>
+                                    <p class="text-lg text-gray-600 mt-2 text-center">Despliegue de Portal Web, Bots y<br>Módulo Aftercare.</p>
+                                </div>
+                                <!-- Fase 3 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-shield-halved fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">Fase 3</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Plataforma Unificada</h4>
+                                    <p class="text-lg text-gray-600 mt-2 text-center">Implementación de "Conecta Salud"<br>integral y escalable.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Valor Tecnológico (NUEVO) -->
+            <section class="slide">
+                <div class="slide-content justify-center">
+                    <h2 class="pdf-title text-center">VALOR TECNOLÓGICO ESTRATÉGICO</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-eye fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Trazabilidad Total</h4>
+                            <p class="text-gray-600 text-lg">Visibilidad 360° de cada paciente, desde el primer contacto hasta el cierre del caso.</p>
+                        </div>
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-chart-line fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Reducción de Siniestralidad</h4>
+                            <p class="text-gray-600 text-lg">Control de costos por IA, red priorizada y auditoría de datos en tiempo real.</p>
+                        </div>
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-thumbs-up fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Experiencia Superior</h4>
+                            <p class="text-gray-600 text-lg">Atención omnicanal, eficiente y sin fricción que genera confianza y bienestar.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== FIN DE NUEVOS SLIDES TECNOLÓGICOS ====== -->
+
+
+            <!-- Slide 15: Plan de Implementación (Originalmente 10) -->
+            <section class="slide">
+                <div class="slide-content">
+                    <h2 class="pdf-title text-center">PLAN DE IMPLEMENTACIÓN (OPERATIVO)</h2>
+                    <div class="flex-grow flex flex-col justify-center">
+                        <div class="relative w-full px-10">
+                            <!-- Línea Horizontal -->
+                            <div class="absolute top-1/2 left-0 right-0 h-1 bg-[var(--green-primary)] -translate-y-1/2"></div>
+                            
+                            <div class="relative flex justify-between">
+                                <!-- Fase 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-list-check fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">(Mes 1)</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Preparación</h4>
+                                    <ul class="list-disc list-inside text-lg text-gray-600 mt-2">
+                                        <li>Solicitud de datos.</li>
+                                        <li>Instalación de sistema.</li>
+                                        <li>Conformación de equipos.</li>
+                                    </ul>
+                                </div>
+                                <!-- Fase 2 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-rocket fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">(Meses 2-4)</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Ejecución</h4>
+                                    <ul class="list-disc list-inside text-lg text-gray-600 mt-2">
+                                        <li>Inicio de seguimiento.</li>
+                                        <li>Reportes en Power BI.</li>
+                                        <li>Primeros indicadores.</li>
+                                    </ul>
+                                </div>
+                                <!-- Fase 3 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-16 h-16 bg-[var(--green-primary)] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg z-10">
+                                        <i class="fa-solid fa-trophy fa-2x"></i>
+                                    </div>
+                                    <div class="font-['Oswald'] text-lg font-semibold bg-[var(--green-primary)] text-white px-4 py-1 rounded-full -mt-3 z-10">(Meses 5-6)</div>
+                                    <h4 class="font-['Oswald'] text-2xl font-semibold mt-4">Consolidación</h4>
+                                    <ul class="list-disc list-inside text-lg text-gray-600 mt-2">
+                                        <li>Programa de crónicos.</li>
+                                        <li>Evaluación y ajustes.</li>
+                                        <li>Informe de resultados.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 16: Resultados Esperados (Originalmente 11) -->
+            <section class="slide">
+                <div class="slide-content justify-center">
+                    <h2 class="pdf-title text-center">RESULTADOS ESPERADOS</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-piggy-bank fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <span class="font-['Oswald'] text-6xl font-extrabold text-[var(--green-primary)]">10-20%</span>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Ahorro en Siniestralidad</h4>
+                            <p class="text-gray-600 text-lg">(Primer Año)</p>
+                        </div>
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-hospital-user fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <span class="font-['Oswald'] text-6xl font-extrabold text-[var(--green-primary)]">15-30%</span>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Reducción de Hospitalizaciones</h4>
+                            <p class="text-gray-600 text-lg">(Innecesarias)</p>
+                        </div>
+                        <div class="pdf-card text-center border-t-8 border-[var(--green-primary)]">
+                            <i class="fa-solid fa-thumbs-up fa-4x text-[var(--green-primary)] mb-4"></i>
+                            <span class="font-['Oswald'] text-6xl font-extrabold text-[var(--green-primary)]">Mayor</span>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-gray-800 mt-2">Satisfacción</h4>
+                            <p class="text-gray-600 text-lg">(Del paciente y recuperación de personal)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 17: Conclusión (Originalmente 12) -->
+            <section class="slide">
+                <div class="slide-content bg-gray-800 text-white">
+                    <h2 class="pdf-title text-center text-white">CONCLUSIÓN: UNA GESTIÓN INTEGRAL</h2>
+                    <p class="text-xl text-center text-gray-300 -mt-6 mb-10 max-w-4xl mx-auto">
+                        El Concierge Médico se consolida como una herramienta de gestión clínica, administrativa y tecnológica que:
+                    </o>
+                    <div class="grid grid-cols-4 gap-6">
+                        <div class="text-center bg-gray-700 p-6 rounded-lg">
+                            <span class="font-['Oswald'] text-3xl font-bold text-gray-300 mb-2 block">01</span>
+                            <i class="fa-solid fa-sitemap fa-3x text-[var(--green-accent)] mb-3"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-white">Centraliza</h4>
+                            <p class="text-gray-300">La atención de todos los asegurados.</p>
+                        </div>
+                        <div class="text-center bg-gray-700 p-6 rounded-lg">
+                            <span class="font-['Oswald'] text-3xl font-bold text-gray-300 mb-2 block">02</span>
+                            <i class="fa-solid fa-tasks fa-3x text-[var(--green-accent)] mb-3"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-white">Optimiza</h4>
+                            <p class="text-gray-300">La red de prestadores y recursos.</p>
+                        </div>
+                        <div class="text-center bg-gray-700 p-6 rounded-lg">
+                            <span class="font-['Oswald'] text-3xl font-bold text-gray-300 mb-2 block">03</span>
+                            <i class="fa-solid fa-chart-line fa-3x text-[var(--green-accent)] mb-3"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-white">Mejora</h4>
+                            <p class="text-gray-300">Los resultados de salud y reduce costos.</p>
+                        </div>
+                        <div class="text-center bg-gray-700 p-6 rounded-lg">
+                            <span class="font-['Oswald'] text-3xl font-bold text-gray-300 mb-2 block">04</span>
+                            <i class="fa-solid fa-shield-halved fa-3x text-[var(--green-accent)] mb-3"></i>
+                            <h4 class="font-['Oswald'] text-2xl font-semibold text-white">Fortalece</h4>
+                            <p class="text-gray-300">La capacidad operativa del cuerpo policial.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 18: Gracias (Originalmente 13) -->
+            <section class="slide">
+                <div class="slide-content justify-center items-center text-white" style="background: linear-gradient(135deg, var(--green-primary), var(--green-accent));">
+                    <h2 class="font-['Oswald'] text-8xl font-bold">GRACIAS</h2>
+                </div>
             </section>
 
         </div>
@@ -513,7 +769,7 @@
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </button>
         
-        <span id="slideCounter" class="text-gray-700 font-semibold text-lg w-16 text-center">1 / 13</span>
+        <span id="slideCounter" class="text-gray-700 font-semibold text-lg w-16 text-center" style="font-family: var(--font-body);">1 / 18</span>
         
         <button id="nextBtn" class="nav-button">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -528,7 +784,7 @@
             const slideCounter = document.getElementById('slideCounter');
             
             let currentSlide = 0;
-            const totalSlides = slides.length;
+            const totalSlides = slides.length; // Esto ahora será 18
 
             function showSlide(index) {
                 // Ocultar todas las slides
@@ -561,6 +817,15 @@
                     showSlide(currentSlide);
                 }
             });
+            
+            // Navegación con teclas de flecha
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                }
+            });
 
             // Mostrar la primera slide al cargar
             showSlide(currentSlide);
@@ -569,4 +834,3 @@
 
 </body>
 </html>
-
